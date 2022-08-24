@@ -5,8 +5,31 @@ import logoImg from "../../../public/logo.svg";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/Button";
 import Link from "next/link";
+import { FormEvent, useState, useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function SignUp() {
+  const { signUp } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignUp(event: FormEvent) {
+    event.preventDefault();
+    if (name === "" || email === "" || password === "") {
+      return alert("We need data");
+    }
+    setLoading(true);
+
+    let data = {
+      name,
+      email,
+      password,
+    };
+    await signUp(data);
+    setLoading(false);
+  }
   return (
     <>
       <Head>
@@ -16,12 +39,27 @@ export default function SignUp() {
         <Image src={logoImg} alt="Logo Sujeito Pizzaria" />
         <div className={styles.login}>
           <h1>Criando sua conta</h1>
-          <form>
-            <Input placeholder="Digite seu nome" type="text" />
-            <Input placeholder="Digite seu e-mail" type="text" />
-            <Input placeholder="Digite sua senha" type="password" />
+          <form onSubmit={handleSignUp}>
+            <Input
+              placeholder="Digite seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+            />
+            <Input
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+            />
+            <Input
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+            />
 
-            <Button type="submit" loading={false}>
+            <Button loading={loading} type="submit">
               Cadastrar
             </Button>
           </form>
