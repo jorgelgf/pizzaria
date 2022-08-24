@@ -18,3 +18,15 @@ Dentro do tsconfig.json adc:
 ## adc Sass
 
 yarn add sass
+
+## Axios para aquisições http
+
+yarn add axios
+
+## dados no lado client side e server side
+
+yarn add nookies
+
+## Para trabalhar com jwt
+
+yarn add jwt-decode
