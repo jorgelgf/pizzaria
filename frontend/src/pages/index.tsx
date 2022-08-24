@@ -20,7 +20,12 @@ export default function Home() {
       email,
       password,
     };
+
+    if (email === "" || password === "") return alert("We need data");
+
+    setLoading(true);
     await signIn(data);
+    setLoading(false);
   }
 
   return (
@@ -45,7 +50,7 @@ export default function Home() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button type="submit" loading={false}>
+            <Button type="submit" loading={loading}>
               Acessar
             </Button>
           </form>
