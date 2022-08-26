@@ -5,6 +5,8 @@ import logoImg from "../../public/logo.svg";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/Button";
 import Link from "next/link";
+import { canSSRGuest } from "../utils/canSSRGuest";
+
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext, FormEvent, useState } from "react";
 import { toast } from "react-toastify";
@@ -66,3 +68,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {},
+  };
+});
