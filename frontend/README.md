@@ -30,3 +30,7 @@ yarn add nookies
 ## Para trabalhar com jwt
 
 yarn add jwt-decode
+
+## Alertas com react-toastify
+
+yarn add react-toastify
