@@ -62,6 +62,21 @@ export default function Dashboard({ orders }: HomeProps) {
     setModalVisible(true);
   };
 
+  async function handleFinishItem(id: string) {
+    const apiClient = setupAPIClient();
+    await apiClient.put("/order/finish", {
+      order_id: id,
+    });
+    const response = await apiClient.get("/orders");
+    setOrderList(response.data);
+    setModalVisible(false);
+  }
+  async function handleRefreshOrders() {
+    const apiClient = setupAPIClient();
+    const response = await apiClient.get("/orders");
+    setOrderList(response.data);
+  }
+
   Modal.setAppElement("#__next");
 
   return (
@@ -74,11 +89,16 @@ export default function Dashboard({ orders }: HomeProps) {
         <main className={styles.container}>
           <div className={styles.containerHeader}>
             <h1>Últimos pedidos</h1>
-            <button>
+            <button onClick={handleRefreshOrders}>
               <FiRefreshCcw size={25} color="#3fffa3" />
             </button>
           </div>
           <article className={styles.listOrders}>
+            {orderList.length === 0 && (
+              <span className={styles.emptyList}>
+                Nenhum pedido aberto foi encontrado...
+              </span>
+            )}
             {orderList.map((item) => (
               <section key={item.id} className={styles.orderItem}>
                 <button onClick={() => handleOpenModalView(item.id)}>
@@ -89,11 +109,13 @@ export default function Dashboard({ orders }: HomeProps) {
             ))}
           </article>
         </main>
+
         {modalVisible && (
           <ModalOrder
             isOpen={modalVisible}
             onRequestClose={handleCloseModal}
             order={modalItem}
+            handleFinishOrder={handleFinishItem}
           />
         )}
       </div>
