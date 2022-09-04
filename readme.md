@@ -34,3 +34,8 @@ Projeto para administrar pedidos em uma pizzaria
 ### Dashboard
 
 ![image](https://user-images.githubusercontent.com/47546263/188326146-dfccb783-418d-4653-ba44-864958fa36c5.png)
+
+### Modal com detalhes do pedido
+
+![image](https://user-images.githubusercontent.com/47546263/188326636-3d1c5dec-838e-46b4-ba3c-750db75dce07.png)
+
