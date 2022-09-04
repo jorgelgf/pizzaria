@@ -34,3 +34,8 @@ yarn add jwt-decode
 ## Alertas com react-toastify
 
 yarn add react-toastify
+
+## lib para modal
+
+yarn add react-modal
+yarn add @types/react-modal -D
